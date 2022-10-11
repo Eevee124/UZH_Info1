@@ -30,7 +30,7 @@ def gcd(a, b):
 # value to the Console. This way you can check what it does.
 # However, we encourage you to write tests, because then you
 # can easily test many different values on every "Test & Run"!
-a = 1000000000
-b = 1
+a = -1000000000000000010
+b = -100000000000000000
 print(f"greatest common divisor of {a} and {b} is = {gcd(a, b)}")
 
