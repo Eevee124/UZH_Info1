@@ -3,8 +3,13 @@
 # This signature is required for the automated grading to work.
 # Do not rename the function or change its list of parameters!
 def req_steps(num_disks):
-    # implement this function
-    return -1
+    #implement this function
+    if num_disks == 1:
+        return 1
+    else:
+        return 2*req_steps(num_disks - 1) + 1
+    
+    #works with 2**num_disks - 1
 
 
 # The following line calls the function and prints the return

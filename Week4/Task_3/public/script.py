@@ -12,7 +12,14 @@ def absolute_value(a):
 # Do not rename the function or change its list of parameters!
 def gcd(a, b):
     # implement this function
-    pass
+    if a == 0 and b == 0:
+        return None
+    if a == 0 or b == 0:
+        return a if b == 0 else b
+    if a < b:
+        return gcd(a - a, b - a)
+    else:
+        return gcd(a - b, b - b)
 
 
 # The following line calls the function and prints the return
