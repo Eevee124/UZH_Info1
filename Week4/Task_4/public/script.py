@@ -14,7 +14,12 @@ def is_valid_IPv4_octet(octet: str):
 
 def is_valid_IPv4(ip: str):
     """Returns True if ip represents a valid IPv4 address, False otherwise"""
-    pass
+    ip = ip.split('.')
+    for i in range(4):
+        if int(ip[i]) < 0 or int(ip[i]) > 255:
+            print(ip[i])
+            return False
+    return True
 
 def is_valid_IPv6_hextet(hextet: str):
     """Returns True if hextet represents a valid IPv6 hextet, False otherwise"""
@@ -22,11 +27,24 @@ def is_valid_IPv6_hextet(hextet: str):
 
 def is_valid_IPv6(ip: str):
     """Returns True if ip represents a valid IPv6 address, False otherwise"""
-    pass
+    ip = ip.split(':')
+    for i in range(8):
+        if (not ip[i].isdigit()) and (int(ip[i], 16) < 0 or int(ip[i], 16) > int('FFFF', 16)):
+            print(ip[i])
+            return False
+    return True
 
 def is_valid_IP(ip: str):
     """Returns True if ip represents a valid IPv4 or IPv6 address False otherwise"""
-    pass
+    if '.' in ip:
+        if len(ip.split('.')) == 4:
+            if is_valid_IPv4(ip):
+                return True
+    elif ':' in ip:
+        if len(ip.split(':')) == 8:
+            if is_valid_IPv6(ip):
+                return True
+    return False
 
 
 # The following lines call is_valid_IP and print the result.
