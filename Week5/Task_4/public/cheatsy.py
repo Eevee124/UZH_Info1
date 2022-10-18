@@ -4,17 +4,10 @@
 # This signature is required for the automated grading to work.
 # Do not rename the function or change its list of parameters!
 def min_domino_rotations(top, bottom):
-    n = len(top)
-    option = -1
     for num in range(1, 7):
-        options = all(num in domino for domino in zip(top, bottom))
-        #print(f"{num=} for {options=}")
-        
-        if options:
-            option = num
-            break
-
-    return n - max(top.count(option), bottom.count(option)) if option != -1 else option
+      if all(num in pair for pair in zip(top, bottom)):
+        return len(top) - max(top.count(num), bottom.count(num))
+    return -1
 
 # The following line calls the function which will print # value to the Console.
 # This way you can check what it does.
