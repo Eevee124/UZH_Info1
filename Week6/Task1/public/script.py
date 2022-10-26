@@ -24,11 +24,11 @@ def build_string_pyramid():
     for i in range(len(strings) - 2, -1, -1):
         s += strings[i] + "\n"
     
-    print(s[:-1].count("\n"))
+    #print(s[1:].count("\n"))
 
     # You don't need to change the following line.
     # It simply returns the string created above.
-    return s[:-1]
+    return s[1:]
 
 # The following line calls the function and prints the return
 # value to the Console. This way you can check what it does.
