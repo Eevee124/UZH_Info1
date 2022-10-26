@@ -14,11 +14,6 @@ def merge(a, b):
     elif len(b) < len(a):
         lengthen(b, len(a))
 
-    #mergelist = []
-
-    #for i in range(len(a)):
-    #    mergelist.append((a[i], b[i]))
-
     return list(zip(a, b))
 
 def lengthen(a, length):

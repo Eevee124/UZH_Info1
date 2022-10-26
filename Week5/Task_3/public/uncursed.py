@@ -15,8 +15,6 @@ def reverse_index(dataset):
     dataset = [words.lower() for words in dataset]
     wordlist = list(set((" ".join(dataset)).lower().split()))
     #create a list of all words that appear in dataset after making everything lowercase
-    
-    print(dataset, " ", wordlist)
 
     inside = [is_in(word, dataset) for word in wordlist]
     print(inside)

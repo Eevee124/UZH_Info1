@@ -20,7 +20,6 @@ def hamming_dist(signal_1, signal_2):
 
     ham = [hamming(pear[0], pear[1]) for pear in zip(signal_1, signal_2)]
     #create list of hamming distances of tuples where you compare first element with second in tuple
-    print(dict(zip(signal_1, ham)))
 
     return [(first, second, dist) for first, second, dist in (zip(signal_1, signal_2, ham)) if dist]
     #return triplet tuple of signal 1, 2 and hamming distance whenever hamming distance is not equal to 0
