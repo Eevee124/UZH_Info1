@@ -12,12 +12,14 @@ def process_data(path_reading, path_writing):
     with open(path_reading, 'r') as f:
         with open(path_writing, 'w') as g:
             file = f.readlines()
+            print(len(file))
             if len(file) > 0:
                 for i, line in enumerate(file):
-                    if line == 'Name\n' or line == 'name\n':
+                    line = line.strip()
+                    if line == 'Name' or line == 'name':
                         g.write("Firstname,Lastname")
-                
-                    elif line == '\n':
+        
+                    elif line == '':
                         g.write(',')
 
                     elif ';' in line:
