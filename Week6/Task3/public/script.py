@@ -7,15 +7,34 @@ import os
 def process_data(path_reading, path_writing):
     if not os.path.exists(path_reading):
         # what to do if the input file does not exist?
-        pass
-    # the rest of your implementation
+        return False
+    
+    with open(path_reading, 'r') as f:
+        with open(path_writing, 'w') as g:
+            file = f.readlines()
+            if len(file) > 0:
+                for i, line in enumerate(file):
+                    if line == 'Name\n' or line == 'name\n':
+                        g.write("Firstname,Lastname")
+                
+                    elif line == '\n':
+                        g.write(',')
+
+                    elif ';' in line:
+                        g.write(line.split()[1] + ',' + line.split()[0][:-1])
+
+                    else:
+                        g.write(line.split()[0] + ',' + line.split()[1])
+
+                    if i != len(file) - 1:
+                        g.write('\n')
 
 
 # The following line calls your solution function with the provided input file
 # and then attempts to read and print the contents of the resulting output file.
 # You do not need to modify these lines.
-INPUT_PATH = "public/my_data.txt"
-OUTPUT_PATH = "public/my_data_processed.txt"
+INPUT_PATH = "c:/Users/evang/OneDrive/Desktop/UZH/Informatik_I_UZH_folder/UZH_Exercises/Week6/Task3/public/my_data.txt"
+OUTPUT_PATH = "c:/Users/evang/OneDrive/Desktop/UZH/Informatik_I_UZH_folder/UZH_Exercises/Week6/Task3/public/my_data_processed.txt"
 process_data(INPUT_PATH, OUTPUT_PATH)
 if os.path.exists(OUTPUT_PATH):
     with open(OUTPUT_PATH) as resultfile:
