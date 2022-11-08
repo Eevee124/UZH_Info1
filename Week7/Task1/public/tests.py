@@ -23,3 +23,10 @@ class MedianTests(TestCase):
 
     def test_median_works_for_even_lists(self):
         self.assertEqual(3, median([5, 1]))
+        
+    def test_median_works_for_even_lists(self):
+        self.assertEqual(None, median([]))
+
+    def test_median_works_for_even_lists(self):
+        self.assertEqual(3, median([5, 1]))
+
