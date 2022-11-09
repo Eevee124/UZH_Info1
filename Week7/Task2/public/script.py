@@ -25,13 +25,51 @@ def convert_roman_to_int(roman):
         "CD": 400,
         "CM": 900
     }
-    num = 0
 
-    return num
+    invalid = ["IIII", "XXXX" "CCCC", "VV", "LL", "DD", "VX"]
+
+    for char in roman:
+        if char not in roman_single_digits or roman in invalid:
+            raise Warning("Invalid Input")
+
+
+    res = 0
+    i = 0
+ 
+    while (i < len(roman)):
+ 
+        # Getting value of symbol s[i]
+        s1 = roman_single_digits[roman[i]]
+ 
+        if (i + 1 < len(roman)):
+ 
+            # Getting value of symbol s[i + 1]
+            s2 = roman_single_digits[roman[i + 1]]
+ 
+            # Comparing both values
+            if (s1 >= s2):
+ 
+                # Value of current symbol is greater
+                # or equal to the next symbol
+                res = res + s1
+                i = i + 1
+            else:
+ 
+                # Value of current symbol is greater
+                # or equal to the next symbol
+                res = res + s2 - s1
+                i = i + 2
+        else:
+            res = res + s1
+            i = i + 1
+ 
+    return res
+
+print(convert_roman_to_int("IIII"))
 
 
 # The following lines calls the function and prints the return
 # value to the Console.
-i = convert_roman_to_int("XV")
+i = convert_roman_to_int("IIMX")
 print(i)
 

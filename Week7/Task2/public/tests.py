@@ -20,6 +20,12 @@ class ConversionTestSuite(TestCase):
         m = f"should be {expected} but was {actual}"
         self.assertEqual(expected, actual, m)
 
+    def test_basic(self, roman):
+        actual = convert_roman_to_int(roman)
+        m = "The function should return an int!"
+        self.assertTrue(isinstance(actual, int), m)
+
+
     def test_simple_numeralI(self):
         self._assert("I", 1)
 
@@ -41,15 +47,53 @@ class ConversionTestSuite(TestCase):
     def test_simple_numeralM(self):
         self._assert("M", 1000)
 
-
     def test_simple_additive1(self):
         self._assert("XI", 11)
 
     def test_simple_additive2(self):
         self._assert("MD", 1500)
 
+    #def test_return_type(self):
+    #    self.assertIsInstance(convert_roman_to_int(str), int)
 
+    #Check that basic subtractive notation works correctly, e.g. "IV" is 4, "XL" is 40 and "CD" is 400, "IX" is 9, "XC" is 90 and "CM" is 900.
 
+    def test_simple_sub1(self):
+        self._assert("IV", 4)
+    
+    def test_simple_sub2(self):
+        self._assert("XL", 40)
+    
+    def test_simple_sub3(self):
+        self._assert("CD", 400)
+    
+    def test_simple_sub4(self):
+        self._assert("IX", 9)
+
+    def test_simple_sub5(self):
+        self._assert("XC", 90)
+    
+    def test_simple_sub6(self):
+        self._assert("CM", 900)
+    
+    def test_simple_longadd0(self):
+        self._assert("VIII", 8)
+
+    def test_simple_longadd1(self):
+        self._assert("MDC", 1600)
+
+    def test_simple_add_sub0(self):
+        self._assert("XIV", 14)
+
+    def test_simple_add_sub0(self):
+        self._assert("XLI", 41)
+
+#need to check that fct returns integer value
+#need to check how raise Warning() works and implement this
+#by rasising warning for:
+
+# -numerals outside the valid roman numerals
+# -
 
 
 
