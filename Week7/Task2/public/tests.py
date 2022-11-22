@@ -20,12 +20,6 @@ class ConversionTestSuite(TestCase):
         m = f"should be {expected} but was {actual}"
         self.assertEqual(expected, actual, m)
 
-    def test_basic(self, roman):
-        actual = convert_roman_to_int(roman)
-        m = "The function should return an int!"
-        self.assertTrue(isinstance(actual, int), m)
-
-
     def test_simple_numeralI(self):
         self._assert("I", 1)
 
@@ -88,12 +82,46 @@ class ConversionTestSuite(TestCase):
     def test_simple_add_sub0(self):
         self._assert("XLI", 41)
 
-#need to check that fct returns integer value
-#need to check how raise Warning() works and implement this
-#by rasising warning for:
+#should accept
+    def test_accept_0(self):
+        self._assert("CDXC", 490)
+    
+    def test_accept_1(self):
+        self._assert("XLIX", 49)
 
-# -numerals outside the valid roman numerals
-# -
+
+#special
+    def test_m_large_nr(self):
+        self._assert("MMMMMMI", 6001)
+
+#invalid numeral errors
+    def test_invalid_num(self):
+        self.assertRaises(Warning, convert_roman_to_int, "XLS")
+    
+    def test_invalid_iterations(self):
+        self.assertRaises(Warning, convert_roman_to_int,"VV")
+    
+    def test_invalid_iterations1(self):
+        self.assertRaises(Warning, convert_roman_to_int, "DD")
+    
+    def test_invalid_iterations2(self):
+        self.assertRaises(Warning, convert_roman_to_int, "LL")
+    
+#special rejects
+    def test_to_reject0(self):
+        self.assertRaises(Warning, convert_roman_to_int, "VIV")
+    
+    def test_to_reject1(self):
+        self.assertRaises(Warning, convert_roman_to_int, "IVII")
+    
+    def test_to_reject2(self):
+        self.assertRaises(Warning, convert_roman_to_int, "CDC")
+    
+    def test_to_reject3(self):
+        self.assertRaises(Warning, convert_roman_to_int, "XCX")
+    
+    def test_to_reject4(self):
+        self.assertRaises(Warning, convert_roman_to_int, "IVI")
 
 
 

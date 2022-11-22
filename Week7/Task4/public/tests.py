@@ -38,5 +38,113 @@ class EvolveTestSuite(TestCase):
             ),
             5
         )
-        #self.assert...
+        self.assertEqual(expected, actual, f"Expected {expected} but instead {actual}")
 
+        def test_evolve2(self):
+            world = (
+                "---",
+                "|#|",
+                "---"
+            )
+            actual = evolve(world, 2)
+            expected = (
+                (
+                "---",
+                "| |"
+                "---"
+            ),
+            0
+        )
+        self.assertEqual(expected, actual, f"Expected {expected} but instead {actual}")
+
+#INVALID INPUTS
+    
+    def test_invalid_tuple(self):
+        self.assertRaises(Warning, evolve, list, 2)
+
+    def test_invalid_char0(self):
+        world = (
+            "----------",
+            "|     # 2|",
+            "|   3 +  |",
+            "|  #  #  |",
+            "----------",
+        )
+        self.assertRaises(Warning, evolve, world, 2)
+
+    def test_invalid_char1(self):
+        world = (
+            "|---|---|---|",
+            "- |     #   -",
+            "-    #  #  #-",
+            "|    |  #    |",
+            "-------------"
+        )
+        self.assertRaises(Warning, evolve, world, 3)
+
+    def test_invalid_char2(self):
+        world = (
+            "-----------",
+            " # # # # # ",
+            "| ---    # |",
+            "-----------|"
+        )
+        self.assertRaises(Warning, evolve, world, 5)
+
+    def test_line_length(self):
+        world = (
+            "---------",
+            "|         |",
+            "|       |",
+            "---------"
+        )
+        self.assertRaises(Warning, evolve, world, 3)
+    
+    def test_line_length1(self):
+        world = (
+            "-----",
+            "|     |",
+            "|     |",
+            "-------"
+        )
+        self.assertRaises(Warning, evolve, world, 10)
+
+    def test_size(self):
+        world = (
+            "--",
+            "||"
+            "||",
+            "--"
+        )
+        self.assertRaises(Warning, evolve, world, 2)
+    
+    def test_size1(self):
+        world = (
+            "----",
+            "----"
+        )
+        self.assertRaises(Warning, evolve, world, 1)
+
+    def test_pos_int(self):
+        world = (
+            "--------------",
+            "|            |",
+            "|   ###      |",
+            "|   #        |",
+            "|    #       |",
+            "|            |",
+            "--------------"
+        )
+        self.assertRaises(Warning, evolve, world, -1)
+    
+    def test_pos_int1(self):
+        world = (
+            "--------------",
+            "|            |",
+            "|   ###      |",
+            "|   #        |",
+            "|    #       |",
+            "|            |",
+            "--------------"
+        )
+        self.assertRaises(Warning, evolve, world, 2.0)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import re
 # Implement this function
 #
 # This signature is required for the automated grading to work.
@@ -26,16 +26,21 @@ def convert_roman_to_int(roman):
         "CM": 900
     }
 
-    invalid = ["IIII", "XXXX" "CCCC", "VV", "LL", "DD", "VX"]
+    invalid = ["IIII", "XXXX" "CCCC", "VV", "LL", "DD", "XM", "IM", "IVIV", "IXIX",  "VX", "VL", "VC", "VD", "VM", "LC", "LD", "LM", "DM",  "IL", "IC", "ID", "IM", "XD", "XM"]
 
     for char in roman:
         if char not in roman_single_digits or roman in invalid:
             raise Warning("Invalid Input")
 
+    x = re.search("^M*(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$", roman)
+    
+    if x == None:
+        raise Warning("Invalid Input")
 
     res = 0
     i = 0
- 
+    appearance = []
+
     while (i < len(roman)):
  
         # Getting value of symbol s[i]
@@ -46,6 +51,7 @@ def convert_roman_to_int(roman):
             # Getting value of symbol s[i + 1]
             s2 = roman_single_digits[roman[i + 1]]
  
+            
             # Comparing both values
             if (s1 >= s2):
  
@@ -59,17 +65,10 @@ def convert_roman_to_int(roman):
                 # or equal to the next symbol
                 res = res + s2 - s1
                 i = i + 2
+
+
         else:
             res = res + s1
             i = i + 1
- 
+
     return res
-
-print(convert_roman_to_int("IIII"))
-
-
-# The following lines calls the function and prints the return
-# value to the Console.
-i = convert_roman_to_int("IIMX")
-print(i)
-
