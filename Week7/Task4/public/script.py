@@ -35,7 +35,6 @@ def evolve(state, steps):
     for i in range(1, len(state) - 1):
         map.append(state[i])
     
-    print(map)
     next = []
 
     #loop through each field in the body and determine next state to use
@@ -50,62 +49,44 @@ def evolve(state, steps):
         for j, field in enumerate(map[i]):
 
             if j == 0 or j == len(map[0]) - 1: continue
-            print(field)
-            print(j)
-
+            
             n = 0
 
             #left neighbour
             if j > 1:
-                if map[i][j - 1] == '#':
-                    n += 1
-                    print('same left')
+                if map[i][j - 1] == '#': n += 1
 
             #right neighbour
             if j < len(map[0]) - 1:
-                if map[i][j + 1] == '#':
-                    n += 1
-                    print('same right')
+                if map[i][j + 1] == '#': n += 1
 
             ####BOTTOMS####
-
             #bottom neighbour
             if i < len(map) - 1:
                 #print('bot')
-                if map[i + 1][j] == '#': 
-                    n += 1
-                    print('bot mid')
+                if map[i + 1][j] == '#': n += 1
             
             #bottom left neighbour
                 if j > 1:
-                    if map[i + 1][j - 1] == '#': 
-                        n += 1
-                        print('bot l')
+                    if map[i + 1][j - 1] == '#': n += 1
+
             #bottom right neighbour
                 if j < len(map[0]) - 1:
-                    if map[i + 1][j + 1] == '#': 
-                        n += 1
-                        print('bot r')
-            
+                    if map[i + 1][j + 1] == '#': n += 1
+
             #####TOPS#####
-            
             #top neighbour
             if i > 0:
 
-                if map[i -1][j] == '#':
-                    n += 1
-                    print('top mid')
+                if map[i -1][j] == '#': n += 1
 
             #top left neighbour
                 if j > 1:
-                    if map[i - 1][j - 1] == '#':
-                        n += 1
-                        print('top l')
+                    if map[i - 1][j - 1] == '#': n += 1
+
             #top right neighbour
                 if j < len(map[0]) - 1:
-                    if map[i - 1][j + 1] == '#':
-                        n += 1
-                        print('top r')
+                    if map[i - 1][j + 1] == '#': n += 1
 
             #checking state of neighbours
             if field == '#':
@@ -120,21 +101,12 @@ def evolve(state, steps):
                 else:
                     next[i] += ' '
 
-            print(n)
-
         next[i] += '|'
 
 
-
-    print(next)
-
+    #inserts first and last line of '-' symbols
     next.insert(0, state[0])
-    print(next)
-
     next.append(state[-1])
-            
-    print(next)
-
 
     if steps == 1:
 
@@ -146,8 +118,8 @@ def evolve(state, steps):
                     alive += 1
         
         return tuple(next), alive # placeholder
-
     else:
+
         return evolve(tuple(next), steps - 1)
 
 field = (

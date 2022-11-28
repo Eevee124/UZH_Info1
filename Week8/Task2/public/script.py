@@ -6,7 +6,21 @@
 class Publication:
 
     def __init__(self, authors, title, year):
-        pass
+        self.__authors = authors
+        self.__title = title
+        self.__year = year
+
+    def __str__(self):
+        repr =  f"Publication({str(self.__authors)}, \"{self.__title}\", {self.__year})"
+
+        return repr.replace("'", "\"")
+    
+    def __repr__(self):
+
+        repr = f"Publication({str(self.__authors)}, \"{self.__title}\", {self.__year})"
+        return repr.replace("'", "\"")
+
+
 
     # To implement the required functionality, you will also have to implement several
     # of the special functions that typically include a double underscore.
