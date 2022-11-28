@@ -10,15 +10,93 @@ class Publication:
         self.__title = title
         self.__year = year
 
-    def __str__(self):
-        repr =  f"Publication({str(self.__authors)}, \"{self.__title}\", {self.__year})"
-
-        return repr.replace("'", "\"")
+    def get_authors(self):
+        authors = []
+        for author in self.__authors:
+            authors.append(author)
+        return sorted(authors)
     
-    def __repr__(self):
+    def get_title(self):
+        return self.__title
 
-        repr = f"Publication({str(self.__authors)}, \"{self.__title}\", {self.__year})"
+    def get_year(self):
+        return self.__year
+
+    def __str__(self):
+        repr =  f"Publication({str(self.__authors)}, \"{self.get_title()}\", {self.get_year()})"
+
         return repr.replace("'", "\"")
+
+    def __repr__(self):
+        repr = f"Publication({str(self.__authors)}, \"{self.get_title()}\", {self.get_year()})"
+        return repr.replace("'", "\"")
+
+    def __hash__(self):
+        return hash((tuple(self.__authors), self.get_title(), self.get_year()))
+
+    #==
+    def __eq__(self, other):
+        if isinstance(other, Publication):
+            return self.get_authors() == other.get_authors() and self.get_title() == other.get_title() and self.get_year() == other.get_year()
+        
+        else: return NotImplemented
+    
+    #!=
+    def __ne__(self, other):
+        if isinstance(other, Publication):
+            return not (self.get_authors() == other.get_authors() and self.get_title() == other.get_title() and self.get_year() == other.get_year())
+        
+        else: return NotImplemented
+
+    #<
+    def __lt__(self, other):
+        if isinstance(other, Publication):
+            if self.get_authors() == other.get_authors():
+                if self.get_title() == other.get_title():
+                    return self.get_year() < other.get_year()
+
+                else: return self.get_title() < other.get_title()
+            else: return self.get_authors() < other.get_authors()
+        
+        else: return NotImplemented
+
+    #<=
+    def __le__(self, other):
+        if isinstance(other, Publication):
+            if self.get_authors() == other.get_authors():
+                if self.get_title() == other.get_title():
+                    return self.get_year() <= other.get_year()
+
+                else: return self.get_title() <= other.get_title()
+            else: return self.get_authors() <= other.get_authors()
+        
+        else: return NotImplemented
+    #>
+    def __gt__(self, other):
+        if isinstance(other, Publication):
+            if self.get_authors() == other.get_authors():
+                if self.get_title() == other.get_title():
+                    return self.get_year() > other.get_year()
+
+                else: return self.get_title() > other.get_title()
+            else: return self.get_authors() > other.get_authors()
+        
+        else: return NotImplemented
+
+    #>=
+    def __ge__(self, other):
+        if isinstance(other, Publication):
+            if self.get_authors() == other.get_authors():
+                if self.get_title() == other.get_title():
+                    return self.get_year() >= other.get_year()
+
+                else: return self.get_title() >= other.get_title()
+            else: return self.get_authors() >= other.get_authors()
+        
+        else: return NotImplemented
+
+
+
 
 
 
@@ -45,8 +123,15 @@ if __name__ == '__main__':
     p3 = Publication(["B"], "C", 2345)
     print(p1 == p2)  # True
     print(p2 == p3)  # False
+    print(hash(p1) == hash(p2)) #True
+    print(hash(p1) == hash(p3)) #False
 
     sales = {
         p1: 273,
         p2: 398,
     }
+
+    print(sales.values())
+    print(p1 > p2) #False
+    print(p2 < p3) #True
+    print(p1 <= p3) #True
