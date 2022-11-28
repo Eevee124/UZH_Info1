@@ -6,11 +6,32 @@ from public.script import ProfanityFilter
 
 class PublicTestSuite(TestCase):
 
-    def test_example(self):
+    def test_example0(self):
         f = ProfanityFilter(["duck", "shot", "batch", "mastard"], "?#$")
-        msg = "abc defghi mastard jklmno"
+        msg = "Abc defghi mastard jklmno"
+        actual = f.filter(msg)
+        expected = "Abc defghi ?#$?#$? jklmno"
+        self.assertEqual(expected, actual)
+    
+    def test_example1(self):
+        f = ProfanityFilter(["duck", "shot", "batch", "mastard"], "?#$")
+        msg = "abc defghi Mastard jklmno"
         actual = f.filter(msg)
         expected = "abc defghi ?#$?#$? jklmno"
+        self.assertEqual(expected, actual)
+    
+    def test_example2(self):
+        f = ProfanityFilter(["duck", "shot", "batch", "mastard"], "?#$")
+        msg = "abc defghi 123mastarddsaf batch"
+        actual = f.filter(msg)
+        expected = "abc defghi 123?#$?#$?dsaf ?#$?#"
+        self.assertEqual(expected, actual)
+    
+    def test_example3(self):
+        f = ProfanityFilter(["duck", "shot", "batch", "mastard", "hot"], "?#$")
+        msg = "abc dshoti mastard jklmno"
+        actual = f.filter(msg)
+        expected = "abc d?#$?i ?#$?#$? jklmno"
         self.assertEqual(expected, actual)
 
     # This current test suite only contains one very basic test case. By now,
