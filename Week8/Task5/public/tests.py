@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 from unittest import TestCase
-from public.script import Restaurant
-from public.item import Item
+from script import Restaurant
+from item import Item
 
 
 class PublicTestSuite(TestCase):

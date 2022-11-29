@@ -10,6 +10,9 @@ class Publication:
         self.__title = title
         self.__year = year
 
+    #getter methods created to access the private attributes from our classes constructor
+    #needed because the exercise dictates it...
+
     def get_authors(self):
         authors = []
         for author in self.__authors:
@@ -21,6 +24,9 @@ class Publication:
 
     def get_year(self):
         return self.__year
+    
+    #the following three methods don't use the getter methods
+    #since get_authors passes an ordered list and this can differ if you compare strings with one another
 
     def __str__(self):
         repr =  f"Publication({str(self.__authors)}, \"{self.get_title()}\", {self.get_year()})"
@@ -33,6 +39,9 @@ class Publication:
 
     def __hash__(self):
         return hash((tuple(self.__authors), self.get_title(), self.get_year()))
+
+    #the rest of these comparisons first check if the compared to is an isntance of publication
+    #then they get compared with one another using the getter methods
 
     #==
     def __eq__(self, other):
